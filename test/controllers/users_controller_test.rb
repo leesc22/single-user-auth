@@ -3,6 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
+    log_in_as(@user)
   end
 
   test "should get index" do
@@ -11,11 +12,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
+    delete user_url(@user)
     get new_user_url
     assert_response :success
   end
 
   test "should create user" do
+    delete user_url(@user)
     assert_difference('User.count') do
       post users_url, params: { user: { email: @user.email, password: 'secret', password_confirmation: 'secret' } }
     end
@@ -43,6 +46,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       delete user_url(@user)
     end
 
-    assert_redirected_to users_url
+    assert_redirected_to signup_url
   end
 end

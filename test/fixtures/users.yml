@@ -3,7 +3,3 @@
 one:
   email: MyString
   password_digest: <%= BCrypt::Password.create('secret') %>
-
-two:
-  email: MyString
-  password_digest: <%= BCrypt::Password.create('secret') %>
