@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    redirect_to signup_url unless User.exists?
+    redirect_to signup_url, alert: 'Please sign up.' unless User.exists?
   end
 
   def create
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Successfully logged in."
       redirect_back_or root_url
     else
-      flash.now[:alert] = 'Invalid email/password combination'
+      flash.now[:alert] = 'Invalid email/password combination.'
       render 'new'
     end
   end
